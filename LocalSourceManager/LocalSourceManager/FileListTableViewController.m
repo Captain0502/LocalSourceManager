@@ -30,21 +30,35 @@
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    UIBarButtonItem *refreshItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshFileList)];
-     self.navigationItem.rightBarButtonItem = refreshItem;
+    UIBarButtonItem *refreshItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh
+                                                                                 target:self
+                                                                                 action:@selector(refreshFileList)];
+    self.navigationItem.rightBarButtonItem = refreshItem;
     
-    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemUndo target:self action:@selector(backStep)];
+    
+    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemUndo
+                                                                              target:self
+                                                                              action:@selector(backStep)];
     self.navigationItem.leftBarButtonItem = backItem;
+    
     
     [self intializedProperties];
 }
 
+
+/**
+ *  刷新当前目录文件列表
+ */
 - (void)refreshFileList {
-    _currentPath = [_defaultManager currentDirectoryPath];
+    _currentPath   = [_defaultManager currentDirectoryPath];
     _fileListArray = [_defaultManager contentsOfDirectoryAtPath:_currentPath error:nil];
     [self.tableView reloadData];
 }
 
+
+/**
+ *  返回上一级菜单，最终目录为document
+ */
 - (void)backStep {
     if ([_topDirectPath isEqualToString:_currentPath]) {
         return;
@@ -58,12 +72,12 @@
     _defaultManager = [NSFileManager defaultManager];
     
     NSArray *userDir = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    _currentPath = userDir.firstObject;
+    _currentPath     = userDir.firstObject;
     [_defaultManager changeCurrentDirectoryPath:_currentPath];
-    _currentPath = [_defaultManager currentDirectoryPath];
-    _topDirectPath = _currentPath;
-    
-    _fileListArray = [_defaultManager contentsOfDirectoryAtPath:_currentPath error:nil];
+    _currentPath     = [_defaultManager currentDirectoryPath];
+    _topDirectPath   = _currentPath;
+
+    _fileListArray   = [_defaultManager contentsOfDirectoryAtPath:_currentPath error:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -89,17 +103,14 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier: cellIdentity];
     }
     
+    
     NSString *fileName = [_fileListArray objectAtIndex:indexPath.row];
     BOOL isDirectory;
-    [_defaultManager fileExistsAtPath:fileName isDirectory:&isDirectory];
-//    if (isDirectory == YES) {
-//        cell.textLabel.textColor = [UIColor blueColor];
-//    }else {
-//    }
-    cell.textLabel.textColor = isDirectory ? [UIColor blueColor] : [UIColor blackColor];
-   
     
+    [_defaultManager fileExistsAtPath:fileName isDirectory:&isDirectory];
+    cell.textLabel.textColor = isDirectory ? [UIColor blueColor] : [UIColor blackColor];
     cell.textLabel.text = fileName;
+    
     
     return cell;
 }
@@ -107,21 +118,28 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString *fileName = [_fileListArray objectAtIndex:indexPath.row];
     BOOL isDirectory;
+    
     [_defaultManager fileExistsAtPath:fileName isDirectory:&isDirectory];
     
     if (isDirectory == YES) {
         [_defaultManager changeCurrentDirectoryPath:fileName];
         _currentPath = [_defaultManager currentDirectoryPath];
         [self refreshFileList];
-    } else /*if ([fileName hasSuffix:@".html"]) */{
+    } else {
         NSLog(@"is file");
         [self push2HtmlShowPageWithFile:fileName];
     }
 }
 
+/**
+ *  现实文件内容
+ *
+ *  @param fileName 文件名称
+ */
 - (void)push2HtmlShowPageWithFile:(NSString *)fileName {
     ShowHtmlTableViewController *htmlPage = [[ShowHtmlTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
     htmlPage.filePath = [_currentPath stringByAppendingPathComponent:fileName];
+    
     [self.navigationController pushViewController:htmlPage animated:YES];
 }
 

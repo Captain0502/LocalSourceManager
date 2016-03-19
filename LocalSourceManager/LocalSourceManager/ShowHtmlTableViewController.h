@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ShowHtmlTableViewController : UITableViewController<UIWebViewDelegate>
+@interface ShowHtmlTableViewController : UITableViewController <UIWebViewDelegate>
 
 @property (nonatomic, strong) NSString *filePath;
 
