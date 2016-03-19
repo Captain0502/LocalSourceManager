@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "E45178561C9CECD200F5B8E1"
+               BlueprintIdentifier = "E43A34B71C9BD5700072B439"
                BuildableName = "LocalSourceManager.app"
                BlueprintName = "LocalSourceManager"
                ReferencedContainer = "container:LocalSourceManager.xcodeproj">
@@ -32,7 +32,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "E45178561C9CECD200F5B8E1"
+            BlueprintIdentifier = "E43A34B71C9BD5700072B439"
             BuildableName = "LocalSourceManager.app"
             BlueprintName = "LocalSourceManager"
             ReferencedContainer = "container:LocalSourceManager.xcodeproj">
@@ -55,7 +55,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "E45178561C9CECD200F5B8E1"
+            BlueprintIdentifier = "E43A34B71C9BD5700072B439"
             BuildableName = "LocalSourceManager.app"
             BlueprintName = "LocalSourceManager"
             ReferencedContainer = "container:LocalSourceManager.xcodeproj">
@@ -74,7 +74,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "E45178561C9CECD200F5B8E1"
+            BlueprintIdentifier = "E43A34B71C9BD5700072B439"
             BuildableName = "LocalSourceManager.app"
             BlueprintName = "LocalSourceManager"
             ReferencedContainer = "container:LocalSourceManager.xcodeproj">
